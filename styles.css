@@ -1,3 +1,33 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid black 6px;
+  min-height: 10vh;
+}
 h1 {
   color: rgb(0, 145, 255);
+}
+main {
+  flex: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+footer {
+  min-height: 5rem;
+  color: white;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
