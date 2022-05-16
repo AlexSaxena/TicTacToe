@@ -29,12 +29,14 @@ main {
   height: 35rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
 }
 .box {
   border: solid black 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 8rem;
 }
 .box-1,
 .box-2,
