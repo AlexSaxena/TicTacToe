@@ -23,6 +23,39 @@ main {
   justify-content: center;
   align-items: center;
 }
+.game-container {
+  /* border: solid black 1px; */
+  width: 35rem;
+  height: 35rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.box {
+  border: solid black 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.box-1,
+.box-2,
+.box-3 {
+  border-top: none;
+}
+.box-3,
+.box-6,
+.box-9 {
+  border-right: none;
+}
+.box-1,
+.box-4,
+.box-7 {
+  border-left: none;
+}
+.box-7,
+.box-8,
+.box-9 {
+  border-bottom: none;
+}
 footer {
   min-height: 5rem;
   color: white;
