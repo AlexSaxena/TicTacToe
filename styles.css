@@ -37,6 +37,10 @@ main {
   justify-content: center;
   align-items: center;
   font-size: 8rem;
+  transition-duration: 0.4s;
+}
+.box:hover {
+  background-color: lightgray;
 }
 .box-1,
 .box-2,
