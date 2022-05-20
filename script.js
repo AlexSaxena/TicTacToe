@@ -16,3 +16,21 @@ const Player = (name = "New Player", marker = "X") => {
   let playerMarker = marker;
   return { name: playerName, marker: playerMarker };
 };
+
+// OnClick For Each Box
+const fillBox = () => {
+  let field = document.querySelector(".gameboard").children;
+  //field.children.item(5).innerText = "X";
+  let fieldArray = Array.from(field);
+  let id = 0;
+  fieldArray.forEach((boxes) => {
+    boxes.addEventListener("click", () => {
+      console.log("test " + boxes.classList.value);
+    });
+  });
+  //Gameboard
+  //return field;
+};
+const Game = () => {
+  return winner;
+};
