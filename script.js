@@ -18,19 +18,28 @@ const Player = (name = "New Player", marker = "X") => {
 };
 
 // OnClick For Each Box
-const fillBox = () => {
+const fillBox = (function () {
   let field = document.querySelector(".gameboard").children;
   //field.children.item(5).innerText = "X";
   let fieldArray = Array.from(field);
   let id = 0;
   fieldArray.forEach((boxes) => {
     boxes.addEventListener("click", () => {
+      //Game();
       console.log("test " + boxes.classList.value);
+      if (boxes.innerText == "") {
+        boxes.innerText = "X";
+      }
     });
   });
   //Gameboard
   //return field;
-};
+})();
+
 const Game = () => {
+  // Take Turns for players
+  // Change innerText & set GameBoard Array
+  // Conditions for Winning ?
+
   return winner;
 };
