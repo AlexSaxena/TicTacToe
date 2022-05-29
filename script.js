@@ -2,7 +2,8 @@ console.log("Greeting General Kenobi!");
 
 // Gameboard Array Module
 const Gameboard = (function () {
-  let gameboard = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  //let gameboard = [1, 2, 3, 4, 5, 6, 7, 8, 9];,
+  let gameboard = Array(9).fill("");
 
   let field = document.querySelector(".gameboard").children;
   let fieldArray = Array.from(field);
@@ -11,11 +12,18 @@ const Gameboard = (function () {
 })();
 
 // Player Factory
-const Player = (name = "New Player", marker = "X") => {
+const newPlayer = (name = "New Player", marker = "X", counter = 0) => {
   let playerName = name;
   let playerMarker = marker;
-  return { name: playerName, marker: playerMarker };
+  let playerCounter = counter;
+  return { name: playerName, marker: playerMarker, counter: playerCounter };
 };
+
+const players = (function () {
+  let playerOne = newPlayer("Player 1");
+  let playerTwo = newPlayer("Player 2", "O");
+  return { playerOne, playerTwo };
+})();
 
 // OnClick For Each Box
 const BoardBoxes = (function () {
@@ -25,9 +33,9 @@ const BoardBoxes = (function () {
 
     boxes.addEventListener("click", () => {
       console.log("Box ID -> " + currentBox);
-      // console.log(boxes.innerText);
+
       if (boxes.innerText == null || boxes.innerText < 1) {
-        console.log("It is Empty");
+        //console.log("It is Empty");
         Game(currentBox);
       } else if (boxes.innerText != null || boxes.innerText > 1) {
         console.log("It is not empty\nContains -> " + boxes.innerText);
@@ -51,6 +59,9 @@ const Game = (currentBox) => {
   // Change innerText & set GameBoard Array
   // Gameboard Array == position[currentBox]
   // Conditions for Winning ?
+  // Gameboard.gameboard[currentBox] = checkPlayer();
+  Gameboard.gameboard[currentBox] = "X";
+  fillBox();
   let winner = console.log("Game func -> " + currentBox);
   return winner;
 };
