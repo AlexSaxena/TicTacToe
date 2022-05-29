@@ -2,12 +2,12 @@ console.log("Greeting General Kenobi!");
 
 // Gameboard Array Module
 const Gameboard = (function () {
-  let gameboard = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9],
-  ];
-  return gameboard;
+  let gameboard = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+  let field = document.querySelector(".gameboard").children;
+  let fieldArray = Array.from(field);
+
+  return { gameboard, fieldArray };
 })();
 
 // Player Factory
@@ -18,28 +18,29 @@ const Player = (name = "New Player", marker = "X") => {
 };
 
 // OnClick For Each Box
-const fillBox = (function () {
-  let field = document.querySelector(".gameboard").children;
-  //field.children.item(5).innerText = "X";
-  let fieldArray = Array.from(field);
-  let id = 0;
+const BoardBoxes = (function () {
+  let fieldArray = Gameboard.fieldArray;
   fieldArray.forEach((boxes) => {
+    let currentBox = boxes.dataset.id;
+
     boxes.addEventListener("click", () => {
-      //Game();
-      console.log("test " + boxes.classList.value);
-      if (boxes.innerText == "") {
-        boxes.innerText = "X";
+      console.log("Box ID -> " + currentBox);
+      // console.log(boxes.innerText);
+      if (boxes.innerText == null || boxes.innerText < 1) {
+        console.log("It is Empty");
+        Game(currentBox);
+      } else if (boxes.innerText != null || boxes.innerText > 1) {
+        console.log("It is not empty\nContains -> " + boxes.innerText);
       }
     });
   });
-  //Gameboard
-  //return field;
 })();
 
-const Game = () => {
+const Game = (currentBox) => {
   // Take Turns for players
   // Change innerText & set GameBoard Array
+  // Gameboard Array == position[currentBox]
   // Conditions for Winning ?
-
+  let winner = console.log("Game func -> " + currentBox);
   return winner;
 };
