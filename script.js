@@ -36,6 +36,16 @@ const BoardBoxes = (function () {
   });
 })();
 
+// Fill Each Box with Array Value
+const fillBox = () => {
+  let field = document.querySelector(".gameboard").children;
+  let fieldArray = Array.from(field);
+
+  for (let i = 0; i < fieldArray.length; i++) {
+    fieldArray[i].innerText = Gameboard.gameboard[i];
+  }
+};
+
 const Game = (currentBox) => {
   // Take Turns for players
   // Change innerText & set GameBoard Array
