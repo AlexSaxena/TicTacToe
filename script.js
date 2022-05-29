@@ -59,9 +59,22 @@ const Game = (currentBox) => {
   // Change innerText & set GameBoard Array
   // Gameboard Array == position[currentBox]
   // Conditions for Winning ?
-  // Gameboard.gameboard[currentBox] = checkPlayer();
-  Gameboard.gameboard[currentBox] = "X";
+  Gameboard.gameboard[currentBox] = checkPlayer();
   fillBox();
-  let winner = console.log("Game func -> " + currentBox);
-  return winner;
+  // let winner = console.log("Game func -> " + currentBox);
+  // return winner;
+};
+
+const checkPlayer = function () {
+  let p1 = players.playerOne;
+  let p2 = players.playerTwo;
+  let currentPlayer = "";
+  if (p1.counter == p2.counter) {
+    currentPlayer = p1.marker;
+    p1.counter++;
+  } else {
+    currentPlayer = p2.marker;
+    p2.counter++;
+  }
+  return currentPlayer;
 };
