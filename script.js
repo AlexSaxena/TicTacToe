@@ -11,12 +11,32 @@ const Gameboard = (function () {
   return { gameboard, fieldArray };
 })();
 
+const winningOutcomes = (function () {
+  const validW = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  return validW;
+})();
+
 // Player Factory
 const newPlayer = (name = "New Player", marker = "X", counter = 0) => {
   let playerName = name;
   let playerMarker = marker;
   let playerCounter = counter;
-  return { name: playerName, marker: playerMarker, counter: playerCounter };
+  let playerBoxes = [];
+  return {
+    name: playerName,
+    marker: playerMarker,
+    counter: playerCounter,
+    boxes: playerBoxes,
+  };
 };
 
 const players = (function () {
@@ -35,7 +55,6 @@ const BoardBoxes = (function () {
       console.log("Box ID -> " + currentBox);
 
       if (boxes.innerText == null || boxes.innerText < 1) {
-        //console.log("It is Empty");
         Game(currentBox);
       } else if (boxes.innerText != null || boxes.innerText > 1) {
         console.log("It is not empty\nContains -> " + boxes.innerText);
@@ -53,32 +72,37 @@ const fillBox = () => {
     if (Gameboard.gameboard[i] != "") {
       fieldArray[i].innerText = Gameboard.gameboard[i].marker;
     } else {
+      // Might remove
       fieldArray[i].innerText = Gameboard.gameboard[i];
     }
   }
 };
 
-const checkPlayer = () => {
+const checkPlayer = (currentBox) => {
   let p1 = players.playerOne;
   let p2 = players.playerTwo;
+  let numCurrentBox = Number(currentBox);
   let currentPlayer;
   if (p1.counter == p2.counter) {
     currentPlayer = p1;
     p1.counter++;
+    p1.boxes.push(numCurrentBox);
   } else {
     currentPlayer = p2;
     p2.counter++;
+    p2.boxes.push(numCurrentBox);
   }
   return currentPlayer;
 };
 
 const checkVictory = () => {
   let gameArr = Gameboard.gameboard;
-  let row1 = [0, 1, 2].map((x) => gameArr[x].marker).join("");
+  let row1 = winningOutcomes[0].map((x) => gameArr[x].marker).join("");
+
   if (row1 === "OOO" || row1 === "XXX") {
     let status = true;
     let winner = gameArr[0].marker;
-    markedBoxes([0, 1, 2]);
+    markedBoxes(winningOutcomes[0]);
     return { status, winner };
   }
   return false;
@@ -106,7 +130,7 @@ const Game = (currentBox) => {
     console.log("it is over Anakin");
     spanOutcome.innerText = `${wCondition.winner} is the Winner!`;
   } else {
-    Gameboard.gameboard[currentBox] = checkPlayer();
+    Gameboard.gameboard[currentBox] = checkPlayer(currentBox);
     fillBox();
   }
 };
@@ -119,7 +143,12 @@ const resetGame = (function () {
     console.log("Reset Btn Pressed!");
     for (let i = 0; i < Gameboard.gameboard.length; i++) {
       Gameboard.gameboard[i] = "";
+      Gameboard.fieldArray[i].style.backgroundColor = "white";
     }
+    players.playerOne.counter = 0;
+    players.playerOne.boxes = [];
+    players.playerTwo.counter = 0;
+    players.playerTwo.boxes = [];
     fillBox();
   });
 })();
