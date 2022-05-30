@@ -50,38 +50,56 @@ const fillBox = () => {
   let fieldArray = Array.from(field);
 
   for (let i = 0; i < fieldArray.length; i++) {
-    fieldArray[i].innerText = Gameboard.gameboard[i];
+    if (Gameboard.gameboard[i] != "") {
+      fieldArray[i].innerText = Gameboard.gameboard[i].marker;
+    } else {
+      fieldArray[i].innerText = Gameboard.gameboard[i];
+    }
   }
 };
 
-const checkPlayer = function () {
+const checkPlayer = () => {
   let p1 = players.playerOne;
   let p2 = players.playerTwo;
-  let currentPlayer = "";
+  let currentPlayer;
   if (p1.counter == p2.counter) {
-    currentPlayer = p1.marker;
+    currentPlayer = p1;
     p1.counter++;
   } else {
-    currentPlayer = p2.marker;
+    currentPlayer = p2;
     p2.counter++;
   }
   return currentPlayer;
 };
 
+const checkVictory = () => {
+  let gameArr = Gameboard.gameboard;
+  let row1 = [0, 1, 2].map((x) => gameArr[x].marker).join("");
+  if (row1 === "OOO" || row1 === "XXX") {
+    let status = true;
+    let winner = gameArr[0].marker;
+    return { status, winner };
+  }
+  return false;
+};
+
 const Game = (currentBox) => {
-  // Take Turns for players
-  // Change innerText & set GameBoard Array
-  // Gameboard Array == position[currentBox]
-  // Conditions for Winning ?
-  Gameboard.gameboard[currentBox] = checkPlayer();
-  fillBox();
-  // let winner = console.log("Game func -> " + currentBox);
-  // return winner;
+  let spanOutcome = document.querySelector(".outcome-span");
+  let wCondition = checkVictory();
+  if (wCondition.status == true) {
+    console.log("it is over Anakin");
+    spanOutcome.innerText = `${wCondition.winner} is the Winner!`;
+  } else {
+    Gameboard.gameboard[currentBox] = checkPlayer();
+    fillBox();
+  }
 };
 
 const resetGame = (function () {
   let btnReset = document.querySelector(".reset-button");
+  let spanOutcome = document.querySelector(".outcome-span");
   btnReset.addEventListener("click", () => {
+    spanOutcome.innerText = "Three in a row to win!";
     console.log("Reset Btn Pressed!");
     for (let i = 0; i < Gameboard.gameboard.length; i++) {
       Gameboard.gameboard[i] = "";
