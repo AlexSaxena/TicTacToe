@@ -33,6 +33,10 @@ main {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
 }
+.outcome-span {
+  font-size: 2rem;
+  text-decoration: underline;
+}
 .box {
   border: solid black 0.5rem;
   display: flex;
