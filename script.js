@@ -54,17 +54,6 @@ const fillBox = () => {
   }
 };
 
-const Game = (currentBox) => {
-  // Take Turns for players
-  // Change innerText & set GameBoard Array
-  // Gameboard Array == position[currentBox]
-  // Conditions for Winning ?
-  Gameboard.gameboard[currentBox] = checkPlayer();
-  fillBox();
-  // let winner = console.log("Game func -> " + currentBox);
-  // return winner;
-};
-
 const checkPlayer = function () {
   let p1 = players.playerOne;
   let p2 = players.playerTwo;
@@ -78,3 +67,25 @@ const checkPlayer = function () {
   }
   return currentPlayer;
 };
+
+const Game = (currentBox) => {
+  // Take Turns for players
+  // Change innerText & set GameBoard Array
+  // Gameboard Array == position[currentBox]
+  // Conditions for Winning ?
+  Gameboard.gameboard[currentBox] = checkPlayer();
+  fillBox();
+  // let winner = console.log("Game func -> " + currentBox);
+  // return winner;
+};
+
+const resetGame = (function () {
+  let btnReset = document.querySelector(".reset-button");
+  btnReset.addEventListener("click", () => {
+    console.log("Reset Btn Pressed!");
+    for (let i = 0; i < Gameboard.gameboard.length; i++) {
+      Gameboard.gameboard[i] = "";
+    }
+    fillBox();
+  });
+})();
