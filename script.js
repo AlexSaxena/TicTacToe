@@ -95,15 +95,45 @@ const checkPlayer = (currentBox) => {
   return currentPlayer;
 };
 
-const checkVictory = () => {
-  let gameArr = Gameboard.gameboard;
-  let row1 = winningOutcomes[0].map((x) => gameArr[x].marker).join("");
+// const checkVictory = () => {
+//   let gameArr = Gameboard.gameboard;
+//   let row1 = winningOutcomes[0].map((x) => gameArr[x].marker).join("");
 
-  if (row1 === "OOO" || row1 === "XXX") {
-    let status = true;
-    let winner = gameArr[0].marker;
-    markedBoxes(winningOutcomes[0]);
-    return { status, winner };
+//   if (row1 === "OOO" || row1 === "XXX") {
+//     let status = true;
+//     let winner = gameArr[0].marker;
+//     markedBoxes(winningOutcomes[0]);
+//     return { status, winner };
+//   }
+//   return false;
+// };
+
+const checkVictory = () => {
+  let playerOnePos = players.playerOne.boxes;
+  let playerTwoPos = players.playerTwo.boxes;
+
+  for (let i = 0; i < winningOutcomes.length; i++) {
+    let winnerArray = winningOutcomes[i];
+
+    let p1Boxes = winnerArray.filter((position) =>
+      playerOnePos.includes(position)
+    );
+    let p2Boxes = winnerArray.filter((position) =>
+      playerTwoPos.includes(position)
+    );
+
+    if (p1Boxes.length == 3) {
+      console.log("p1boxes " + p1Boxes);
+      let winner = players.playerOne.marker;
+      let status = true;
+      markedBoxes(p1Boxes);
+      return { status, winner };
+    } else if (p2Boxes.length == 3) {
+      let winner = players.playerTwo.marker;
+      let status = true;
+      markedBoxes(p2Boxes);
+      return { status, winner };
+    }
   }
   return false;
 };
