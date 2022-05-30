@@ -78,9 +78,25 @@ const checkVictory = () => {
   if (row1 === "OOO" || row1 === "XXX") {
     let status = true;
     let winner = gameArr[0].marker;
+    markedBoxes([0, 1, 2]);
     return { status, winner };
   }
   return false;
+};
+
+const markedBoxes = (boxArr) => {
+  let fieldArray = Gameboard.fieldArray;
+  let tempBoxArr = boxArr;
+  fieldArray.forEach((box) => {
+    let currentBox = box.dataset.id;
+    if (
+      currentBox == tempBoxArr[0] ||
+      currentBox == tempBoxArr[1] ||
+      currentBox == tempBoxArr[2]
+    ) {
+      box.style.backgroundColor = "salmon";
+    }
+  });
 };
 
 const Game = (currentBox) => {
@@ -99,7 +115,7 @@ const resetGame = (function () {
   let btnReset = document.querySelector(".reset-button");
   let spanOutcome = document.querySelector(".outcome-span");
   btnReset.addEventListener("click", () => {
-    spanOutcome.innerText = "Three in a row to win!";
+    spanOutcome.innerText = "Three in a Row to win!";
     console.log("Reset Btn Pressed!");
     for (let i = 0; i < Gameboard.gameboard.length; i++) {
       Gameboard.gameboard[i] = "";
