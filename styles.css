@@ -1,11 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:wght@600&display=swap");
+
 * {
   box-sizing: border-box;
   margin: 0px;
+  font-family: "Anton", sans-serif;
+  font-family: "Playfair Display", serif;
 }
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: lightblue;
 }
 header {
   display: flex;
@@ -26,7 +31,6 @@ main {
   gap: 1rem;
 }
 .gameboard {
-  /* border: solid black 1px; */
   width: 35rem;
   height: 35rem;
   display: grid;
@@ -38,7 +42,8 @@ main {
   text-decoration: underline;
 }
 .box {
-  border: solid black 0.5rem;
+  border: solid grey 0.5rem;
+  background-color: whitesmoke;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,26 +53,6 @@ main {
 .box:hover {
   background-color: lightgray;
 }
-/* .box-1,
-.box-2,
-.box-3 {
-  border-top: none;
-}
-.box-3,
-.box-6,
-.box-9 {
-  border-right: none;
-}
-.box-1,
-.box-4,
-.box-7 {
-  border-left: none;
-}
-.box-7,
-.box-8,
-.box-9 {
-  border-bottom: none;
-} */
 footer {
   min-height: 5rem;
   color: white;
