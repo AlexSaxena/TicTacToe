@@ -67,6 +67,7 @@ const BoardBoxes = (function () {
 const fillBox = () => {
   let field = document.querySelector(".gameboard").children;
   let fieldArray = Array.from(field);
+  checkVictory();
 
   for (let i = 0; i < fieldArray.length; i++) {
     if (Gameboard.gameboard[i] != "") {
@@ -111,6 +112,7 @@ const checkPlayer = (currentBox) => {
 const checkVictory = () => {
   let playerOnePos = players.playerOne.boxes;
   let playerTwoPos = players.playerTwo.boxes;
+  let spanOutcome = document.querySelector(".outcome-span");
 
   for (let i = 0; i < winningOutcomes.length; i++) {
     let winnerArray = winningOutcomes[i];
@@ -127,11 +129,13 @@ const checkVictory = () => {
       let winner = players.playerOne.marker;
       let status = true;
       markedBoxes(p1Boxes);
+      spanOutcome.innerText = `${winner} is the Winner!`;
       return { status, winner };
     } else if (p2Boxes.length == 3) {
       let winner = players.playerTwo.marker;
       let status = true;
       markedBoxes(p2Boxes);
+      spanOutcome.innerText = `${winner} is the Winner!`;
       return { status, winner };
     }
   }
@@ -158,7 +162,7 @@ const Game = (currentBox) => {
   let wCondition = checkVictory();
   if (wCondition.status == true) {
     console.log("it is over Anakin");
-    spanOutcome.innerText = `${wCondition.winner} is the Winner!`;
+    spanOutcome.innerText = `To Play Again Press Reset!`;
   } else {
     Gameboard.gameboard[currentBox] = checkPlayer(currentBox);
     fillBox();
