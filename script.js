@@ -2,9 +2,7 @@ console.log("Greeting General Kenobi!");
 
 // Gameboard Array Module
 const Gameboard = (function () {
-  //let gameboard = [1, 2, 3, 4, 5, 6, 7, 8, 9];,
   let gameboard = Array(9).fill("");
-
   let field = document.querySelector(".gameboard").children;
   let fieldArray = Array.from(field);
 
@@ -53,7 +51,6 @@ const BoardBoxes = (function () {
 
     boxes.addEventListener("click", () => {
       console.log("Box ID -> " + currentBox);
-
       if (boxes.innerText == null || boxes.innerText < 1) {
         Game(currentBox);
       } else if (boxes.innerText != null || boxes.innerText > 1) {
@@ -73,7 +70,7 @@ const fillBox = () => {
     if (Gameboard.gameboard[i] != "") {
       fieldArray[i].innerText = Gameboard.gameboard[i].marker;
     } else {
-      // Might remove
+      console.log("Array empty slot");
       fieldArray[i].innerText = Gameboard.gameboard[i];
     }
   }
@@ -95,19 +92,6 @@ const checkPlayer = (currentBox) => {
   }
   return currentPlayer;
 };
-
-// const checkVictory = () => {
-//   let gameArr = Gameboard.gameboard;
-//   let row1 = winningOutcomes[0].map((x) => gameArr[x].marker).join("");
-
-//   if (row1 === "OOO" || row1 === "XXX") {
-//     let status = true;
-//     let winner = gameArr[0].marker;
-//     markedBoxes(winningOutcomes[0]);
-//     return { status, winner };
-//   }
-//   return false;
-// };
 
 const checkVictory = () => {
   let playerOnePos = players.playerOne.boxes;
@@ -166,7 +150,7 @@ const Game = (currentBox) => {
   let wCondition = checkVictory();
   if (wCondition.status == true) {
     console.log("it is over Anakin");
-    spanOutcome.innerText = `To Play Again Press Reset!`;
+    spanOutcome.innerText = `Hit The button to Play Again!`;
   } else {
     Gameboard.gameboard[currentBox] = checkPlayer(currentBox);
     fillBox();
