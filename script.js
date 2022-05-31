@@ -137,6 +137,12 @@ const checkVictory = () => {
       markedBoxes(p2Boxes);
       spanOutcome.innerText = `${winner} is the Winner!`;
       return { status, winner };
+    } else if (playerOnePos.length + playerTwoPos.length == 9) {
+      let winner = "-";
+      let status = true;
+      markedBoxes([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+      spanOutcome.innerText = `${winner} It is a Draw! -`;
+      return { status, winner };
     }
   }
   return false;
@@ -147,12 +153,10 @@ const markedBoxes = (boxArr) => {
   let tempBoxArr = boxArr;
   fieldArray.forEach((box) => {
     let currentBox = box.dataset.id;
-    if (
-      currentBox == tempBoxArr[0] ||
-      currentBox == tempBoxArr[1] ||
-      currentBox == tempBoxArr[2]
-    ) {
-      box.style.backgroundColor = "salmon";
+    for (let i = 0; i < tempBoxArr.length; i++) {
+      if (currentBox == tempBoxArr[i]) {
+        box.style.backgroundColor = "salmon";
+      }
     }
   });
 };
